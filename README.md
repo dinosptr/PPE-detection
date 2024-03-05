@@ -104,5 +104,5 @@ yolo predict --model yolov8n.pt --imgsz 640 --conf 0.25 ❌
 - For Image: Path to a single image file (e.g., source=" path/to/image.jpg").
 - For Video: Path to a video file (e.g., source="path/to/video.mp4").
 
-# 8. Example Prediction
-![Alt text](assets/giphy (1).gif)
+# 8. Example Output
+![Alt text](assets/giphy(1).gif)
