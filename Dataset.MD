@@ -1,3 +1,26 @@
+# Business Problem: Optimal Workplace Safety through APD Detection
+
+Dalam lingkungan industri, keamanan tempat kerja adalah prioritas utama. Oleh karena itu, business problem yang perlu dipecahkan adalah bagaimana meningkatkan keamanan dan kepatuhan terhadap penggunaan Alat Pelindung Diri (APD) di lokasi kerja. 
+
+## Objectives
+1. **Meningkatkan Kepatuhan:** Mengembangkan sistem deteksi APD yang dapat meningkatkan kepatuhan pekerja terhadap penggunaan alat pelindung diri.
+  
+2. **Pengawasan Efektif:** Menciptakan solusi yang memungkinkan pengawasan efektif terhadap penggunaan APD di berbagai kondisi lingkungan dan lokasi kerja.
+
+3. **Pencegahan Kecelakaan:** Mengurangi risiko kecelakaan dan cedera dengan memberikan peringatan otomatis jika terdeteksi pelanggaran penggunaan APD.
+
+4. **Efisiensi Operasional:** Meningkatkan efisiensi operasional dengan mengurangi waktu yang diperlukan untuk pemeriksaan kepatuhan manual dan memastikan penyelesaian tugas-tugas tanpa hambatan keselamatan.
+
+## Metrik Keberhasilan
+1. **Persentase Kepatuhan:** Meningkatnya persentase kepatuhan pekerja terhadap pedoman penggunaan APD.
+   
+2. **Waktu Respon:** Menurunkan waktu respon dalam mendeteksi pelanggaran APD dan memberikan peringatan.
+
+3. **Tingkat Kecelakaan Berkurang:** Menurunkan tingkat kecelakaan dan cedera yang disebabkan oleh ketidakpatuhan penggunaan APD.
+
+## Solusi Potensial
+Mengimplementasikan sistem deteksi APD berbasis kamera dan algoritma deep learning untuk memastikan keamanan di tempat kerja, dengan integrasi notifikasi otomatis dan pemantauan kepatuhan secara real-time. Solusi ini dapat diadopsi di berbagai industri yang memerlukan keamanan kerja yang optimal.
+
 # Proses Pemilihan Dataset untuk Pengenalan APD
 
 Dokumentasi ini menjelaskan kriteria seleksi dan alasan pemilihan dataset untuk pengenalan Alat Pelindung Diri (APD).
