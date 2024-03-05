@@ -106,3 +106,6 @@ yolo predict --model yolov8n.pt --imgsz 640 --conf 0.25 ❌
 
 # 8. Example Output
 ![Alt text](assets/giphy(1).gif)
+![Alt text](assets/giphy(2).gif)
+![Alt text](assets/giphy(3).gif)
+![Alt text](assets/giphy(4).gif)
