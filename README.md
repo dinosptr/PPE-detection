@@ -1,110 +1,106 @@
-# PPE Detection Model
+# Model Deteksi PPE/APD (Alat Pelindung Diri)
 
-## System Requirements
-- Operating System: Windows, MacOS, or Linux
-- Python 3.10
-- Git
-- Disk Space: At least 2GB available disk space
+## Persyaratan Sistem
+- **Sistem Operasi:** Windows, MacOS, atau Linux
+- **Python 3.10**
+- **Git**
+- **Ruang Disk:** Setidaknya 2GB ruang disk yang tersedia
 
-## Pre-installation Checks
+## Pemeriksaan Pra-instalasi
 
-1. *Check Python Installation:*
-   - Open Command Prompt (cmd).
-   - Check if Python is installed by running:
+1. **Periksa Instalasi Python:**
+   - Buka Command Prompt (cmd).
+   - Periksa apakah Python terinstal dengan menjalankan:
      
     ```bash
     python --version
     ```
      
-   - If Python is not installed, download and install it from [python.org](https://www.python.org/downloads/). Make sure to select the version compatible with your operating system.
+   - Jika Python belum terinstal, unduh dan instal dari [python.org](https://www.python.org/downloads/). Pastikan untuk memilih versi yang kompatibel dengan sistem operasi Anda.
 
-2. *Check Git Installation:*
-   - Check if Git is installed by running:
+2. **Periksa Instalasi Git:**
+   - Periksa apakah Git terinstal dengan menjalankan:
      ```bash
      git --version
-     
-   - If Git is not installed, download and install it from [git-scm.com](https://git-scm.com/downloads/).
+     ```
+   - Jika Git belum terinstal, unduh dan instal dari [git-scm.com](https://git-scm.com/downloads/).
 
-## Installation Steps
+## Langkah Instalasi
 
-# 3. Navigate to Project Folder in Command Prompt:
-   - Change the current directory to your project folder using the cd command.
+### 3. Navigasi ke Folder Proyek melalui Command Prompt:
+   - Ubah direktori saat ini ke folder proyek Anda menggunakan perintah cd.
 
-# 4. Create Virtual Environment and Project Folder:
-   - Create a new folder named "ppe-project" using the following command:
+### 4. Buat Lingkungan Virtual dan Folder Proyek:
+   - Buat folder baru dengan nama "ppe-project" menggunakan perintah berikut:
      ```bash
      mkdir ppe-project
-     
-     
-   - Navigate to the "ppe-project" folder:
+     ```
+   - Navigasi ke folder "ppe-project":
      ```bash
      cd ppe-project
-     
-     
-   - Create a new Python virtual environment named "your-env-name" using the following command:\
+     ```
+   - Buat lingkungan virtual Python baru dengan nama "your-env-name" menggunakan perintah berikut:
      ```bash
      python -m venv your-env-name 
      ```
-     or 
+     atau 
      ```bash
      py -m venv your-env-name
      ```
-     
-     Activate the virtual environment:
-     - On Windows:
-       ```bash
-       .\your-env-name\Scripts\activate
-       
-       
-     - On MacOS/Linux:
-       ```bash
-       source your-env-name/bin/activate
-       
+     - Aktifkan lingkungan virtual:
+       - Pada Windows:
+         ```bash
+         .\your-env-name\Scripts\activate
+         ```
+       - Pada MacOS/Linux:
+         ```bash
+         source your-env-name/bin/activate
+         ```
 
-Now you have set up a project folder named "ppe-project" with a Python virtual environment named "your-env-name." Next, proceed with the remaining installation steps within this project folder.
+Sekarang Anda telah menyiapkan folder proyek bernama "ppe-project" dengan lingkungan virtual Python bernama "your-env-name." Selanjutnya, lanjutkan dengan langkah instalasi yang tersisa dalam folder proyek ini.
 
-# 5. Clone Project Files:
-   - Clone the project repository containing notebook files and the pre-trained model "best.pt" from GitHub with the following command:
+### 5. Clone Berkas Proyek:
+   - Klona repositori proyek yang berisi file notebook dan model pre-trained "best.pt" dari GitHub dengan perintah berikut:
      ```bash
      git clone https://github.com/dinosptr/PPE-detection.git
-     
-
-   - Navigate to the cloned repository folder:
+     ```
+   - Navigasi ke folder repositori yang telah di-clone:
      ```bash
      cd PPE-detection
-     
+     ```
 
-# 6. Create 'ppe' Folder and Clone YOLOv8 (Ultralytics Version):
-
-   - install YOLOv8 (Ultralytics Version) with pip following command:
+### 6. Buat Folder 'ppe' dan Klona YOLOv8 (Versi Ultralytics):
+   - Install YOLOv8 (Versi Ultralytics) dengan pip menggunakan perintah berikut:
      ```bash
      pip install ultralytics
-     
-# 7. Running Code
-Now, you can run the YOLOv8 prediction using the provided examples. Make sure to replace "file.pt" and "path/to/image.jpg" with your actual model file path and image file path, respectively.
+     ```
 
-Example:
+### 7. Menjalankan Kode
+Sekarang, Anda dapat menjalankan prediksi YOLOv8 menggunakan contoh yang disediakan. Pastikan untuk mengganti "file.pt" dan "path/to/image.jpg" dengan jalur file model dan jalur file gambar yang sebenarnya, masing-masing.
+
+Contoh:
 ```bash
 yolo predict model="model/best.pt" imgsz=640 conf=0.25 source=0 show=True ✅
 
 yolo predict model="model/best.pt" imgsz=640 conf=0.25 source="path/to/image.jpg" show=True✅
 
 yolo predict --model yolov8n.pt --imgsz 640 --conf 0.25 ❌
-```
+
 
 ## Parameters
-- model: Path to the yolov8 model file.
-- imgsz: Input image size (in pixels).
-- conf: Confidence threshold for object detection.
-- source: Path to input image or video and can a webcam.
-- show: If True, displays the annotated images or videos in a window. Useful for immediate visual feedback during development or testing.
 
-*Note:* For the source parameter, you can provide the following values:
-- For Webcam: Use source=0 for default webcam or specify the webcam index .
-- For Image: Path to a single image file (e.g., source=" path/to/image.jpg").
-- For Video: Path to a video file (e.g., source="path/to/video.mp4").
+- model: Jalur ke file model yolov8.
+- imgsz: Ukuran gambar input (dalam piksel).
+- conf: Ambang kepercayaan untuk deteksi objek.
+- source: Jalur ke gambar atau video input, atau dapat berupa webcam.
+- show: Jika True, menampilkan gambar atau video yang sudah diannotasi dalam jendela/screen. Berguna untuk umpan balik visual langsung selama pengembangan atau pengujian.
 
-# 8. Example Output
+*Catatan:* Untuk parameter source, Anda dapat memberikan nilai berikut:
+- Untuk Webcam: Gunakan source=0 untuk webcam default atau tentukan indeks webcam.
+- Untuk Gambar: Jalur ke satu file gambar (contoh: source=" path/to/image.jpg").
+- Untuk Video: Jalur ke file video (contoh: source="path/to/video.mp4").
+
+# 8. Contoh Output
 ![Alt text](assets/giphy(1).gif)
 ![Alt text](assets/giphy(2).gif)
 ![Alt text](assets/giphy(3).gif)
