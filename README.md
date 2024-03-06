@@ -111,3 +111,8 @@ Sumber gif:
 2. https://giphy.com/gifs/hiltilatam-tools-hilti-jobsite-OjS6U09TzD8FPsGAYw
 3. https://giphy.com/gifs/theblock-channel-9-block-the-2022-IxOLG81hZQQs0S9tg7
 4. https://giphy.com/gifs/hiltilatam-tools-hilti-jobsite-teJ82BFyT1vjhdDEjK 
+
+# 9. Analisis singkat video:
+Dikarenakan analisis singkat video terdapat di dalam file notebook untuk training model, dan karena file tersebut cukup besar. Agar memudahkan, Anda dapat mengunjungi link Colab ini untuk melihat hasil analisisnya:
+
+[PPE-detection](https://colab.research.google.com/drive/1G3SBZneEzEMXbKQEcSE8QJ7h7hN4VAIm?usp=sharing)
