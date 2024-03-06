@@ -85,7 +85,7 @@ yolo predict model="model/best.pt" imgsz=640 conf=0.25 source=0 show=True ✅
 yolo predict model="model/best.pt" imgsz=640 conf=0.25 source="path/to/image.jpg" show=True✅
 
 yolo predict --model yolov8n.pt --imgsz 640 --conf 0.25 ❌
-
+```
 
 ## Parameters
 
