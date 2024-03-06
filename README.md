@@ -105,3 +105,9 @@ yolo predict --model yolov8n.pt --imgsz 640 --conf 0.25 ❌
 ![Alt text](assets/giphy(2).gif)
 ![Alt text](assets/giphy(3).gif)
 ![Alt text](assets/giphy(4).gif)
+
+Sumber gif:
+1. https://giphy.com/gifs/JoeMillionaireFOX-3jsw7GGcpJnHtpRTDv
+2. https://giphy.com/gifs/hiltilatam-tools-hilti-jobsite-OjS6U09TzD8FPsGAYw
+3. https://giphy.com/gifs/theblock-channel-9-block-the-2022-IxOLG81hZQQs0S9tg7
+4. https://giphy.com/gifs/hiltilatam-tools-hilti-jobsite-teJ82BFyT1vjhdDEjK 
