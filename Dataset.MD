@@ -1,4 +1,4 @@
-# Business Problem: Optimal Workplace Safety through APD Detection
+# Business Problem: Keselamatan di Tempat Kerja yang Optimal melalui Deteksi APD
 
 Dalam lingkungan industri, keamanan tempat kerja adalah prioritas utama. Oleh karena itu, business problem yang perlu dipecahkan adalah bagaimana meningkatkan keamanan dan kepatuhan terhadap penggunaan Alat Pelindung Diri (APD) di lokasi kerja. 
 
