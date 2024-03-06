@@ -113,6 +113,42 @@ Sumber gif:
 4. https://giphy.com/gifs/hiltilatam-tools-hilti-jobsite-teJ82BFyT1vjhdDEjK 
 
 # 9. Analisis singkat video:
-Dikarenakan analisis singkat video terdapat di dalam file notebook untuk training model, dan karena file tersebut cukup besar. Agar memudahkan, Anda dapat mengunjungi link Colab ini untuk melihat hasil analisisnya:
+Dikarenakan video tidak dapat ditampilkan di dalam dokumentasi ini, Anda dapat mengakses video hasil prediksi pada link berikut:
 
+Link video hasil prediksi:
+[Result-predict](https://drive.google.com/drive/folders/1v466ISQPV8wDtIrislqu-4TY3b13qJYJ?usp=sharing)
+terdiri dari:
+1. result-AI-video-contoh-trim.avi (sample from quest predict)
+2. result-AI-video-construction-japan.avi (another sample)
+3. result-AI-predict-realtime.avi (real-time predict)
+
+Silakan akses link di atas untuk melihat hasil prediksi pada ketiga video tersebut.
+
+### 1. Analisis video sample (result-AI-video-contoh-trim.avi)
+
+Model mampu mengenali objek dengan baik pada video ketika objek berada dalam jarak dekat. Namun, terdapat kesulitan saat objek berada pada jarak yang lebih jauh, seperti yang terlihat pada contoh video yang diberikan, di mana deteksi objek seperti hardhat, safety vest, dan orang menjadi kurang akurat pada jarak yang lebih jauh.
+
+#### Faktor-faktor yang Mempengaruhi Kesulitan Deteksi pada Jarak Jauh:
+
+- Ukuran Objek yang Kecil:
+- Kurangnya Detail Visual:
+- Kondisi Pencahayaan yang Kurang Baik:
+- Faktor Dataset:
+- Faktor Model Pelatihan:
+    
+Analisis ini menunjukkan bahwa jarak objek dalam video dapat mempengaruhi kemampuan model YOLO dalam mendeteksi objek dengan akurat. Faktor-faktor seperti ukuran objek, detail visual, kondisi pencahayaan, dataset, dan pelatihan model menjadi kritis dalam meningkatkan kinerja model, terutama pada objek yang berada pada jarak yang lebih jauh. Peningkatan pada parameter dan penyesuaian pada data latih yang melibatkan situasi jarak jauh dapat diperlukan untuk mengatasi kesulitan deteksi.
+
+---
+
+### 2. Analisis video sample (result-AI-video-construction-japan.avi)
+
+Model berhasil mengenali objek dengan baik pada video kedua berkat beberapa faktor kunci, termasuk resolusi tinggi yang memungkinkan deteksi objek dengan akurat dan detail. Pencahayaan optimal di siang hari memberikan kejelasan visual pada objek, sementara kontras yang jelas antara objek dan latar belakang meningkatkan kemampuan model untuk membedakan objek dengan lebih baik. Faktor lain yang mendukung keberhasilan melibatkan jarak objek yang tidak terlalu jauh, lingkungan yang konsisten untuk kestabilan deteksi, dan kualitas rekaman video yang tinggi, mendukung analisis objek dengan detail baik. Semua faktor ini bersinergi untuk menciptakan kondisi yang mendukung deteksi objek yang akurat dan efektif pada video tersebut.
+
+--- 
+
+### Kesimpulan antara keduanya
+Dengan faktor-faktor yang bersinergi secara optimal, video kedua mencerminkan keberhasilan model dalam mengenali objek dengan akurat dan efektif. Analisis mendalam terhadap resolusi tinggi, pencahayaan optimal, dan faktor-faktor pendukung lainnya memberikan wawasan yang berharga untuk pengembangan model deteksi objek pada situasi serupa. Keseluruhan, pencapaian ini memberikan landasan yang kuat untuk peningkatan lebih lanjut pada kinerja model, membuktikan bahwa kombinasi kondisi yang baik dapat memberikan hasil deteksi yang optimal.
+
+# 10. Tambahan:
+- Jika ukuran file notebooks terlalu besar dan tidak dapat ditampilkan langsung, Anda dapat mengunduh repositori ini atau mengakses link di bawah ini untuk melihat file Jupyter:
 [PPE-detection](https://colab.research.google.com/drive/1G3SBZneEzEMXbKQEcSE8QJ7h7hN4VAIm?usp=sharing)
