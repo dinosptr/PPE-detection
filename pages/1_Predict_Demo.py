@@ -1,12 +1,11 @@
 import streamlit as st
-import torch
 from PIL import Image
 from ultralytics import YOLO
 import cv2
-from tempfile import NamedTemporaryFile
 import os
 import shutil
 
+model = YOLO('model/best.pt')
 
 @st.cache_data
 def process_image(uploaded_file, _model, confidence_threshold):
@@ -24,11 +23,17 @@ def process_image(uploaded_file, _model, confidence_threshold):
 
 
 def save_uploaded_file(uploaded_file):
-    # Create a directory if it doesn't exist
+    # output nama file
+    file_name = "vid_sample.mp4"
+
+    # membuat directory jika tidak ada
     os.makedirs("uploads", exist_ok=True)
-    # Save the uploaded file to a location
-    with open(os.path.join("uploads", uploaded_file.name), "wb") as f:
+
+    # menyimpan file yang di unggah
+    with open(os.path.join("uploads", file_name), "wb") as f:
         f.write(uploaded_file.getbuffer())
+
+    return os.path.join("uploads", file_name)
 
 def clear_directory(directory):
     # Pastikan direktori ada
@@ -51,14 +56,11 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
     None
     """
 
-    # Resize the image to a standard size
-    image = cv2.resize(image, (720, int(720*(9/16))))
-
     # Display object tracking, if specified
     if is_display_tracking:
         res = model.track(image, conf=conf, persist=True, tracker=tracker)
     else:
-        # Predict the objects in the image using the YOLOv8 model
+        # predict object dengan yolov8
         res = model.predict(image, conf=conf)
 
     # # Plot the detected objects on the video frame
@@ -72,7 +74,7 @@ def _display_detected_frames(conf, model, st_frame, image, is_display_tracking=N
 def main():
     # Sidebar untuk memilih jenis input (gambar atau video) dan mengatur confidence threshold
     st.sidebar.title("Options")
-    input_type = st.sidebar.selectbox("Select Input Type", ["Image", "Video", "Webcam"])
+    input_type = st.sidebar.radio("Select Input Type", ["Image", "Video", "Webcam"])
     confidence_threshold = st.sidebar.slider("Confidence Threshold", min_value=0.0, max_value=1.0, value=0.5, step=0.05)
 
     if input_type == "Image":
@@ -81,9 +83,6 @@ def main():
         upload_icon = ":camera:"
         uploaded_file = st.file_uploader(f"{upload_icon} Unggah Gambar PPE (Personal Protective Equipment)", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
-            # Load _model
-            model = YOLO('model/best.pt')  # pretrained YOLOv8n model
-
             # Proses gambar dengan menggunakan st.cache
             result_image = process_image(uploaded_file, model, confidence_threshold)
 
@@ -91,20 +90,46 @@ def main():
             st.image(result_image, caption='Result PPE Detection', use_column_width=True)
 
     elif input_type == "Video":
-        # # Nama direktori yang akan dihapus
-        # directories_to_clear = ["runs", "uploads"]
+        # Nama direktori yang akan dihapus
+        directories_to_clear = ["uploads"]
 
-        # # Hapus semua isi dari setiap direktori yang ditentukan
-        # for directory in directories_to_clear:
-        #     clear_directory(directory)
-        uploaded_video = st.file_uploader("Upload Video (Max 10MB)", type=["mp4"], accept_multiple_files=False)
-        save_uploaded_file(uploaded_file)
+        # Hapus semua isi dari setiap direktori yang ditentukan
+        for directory in directories_to_clear:
+            clear_directory(directory)
+        
+        st.title("Unggah Video PPE (Personal Protective Equipment)")
+        upload_icon = ":movie_camera:"
+        uploaded_video = st.file_uploader(f"{upload_icon} Unggah Video PPE (Personal Protective Equipment) (Max 10MB)", type=["mp4"], accept_multiple_files=False)
         if uploaded_video is not None:
+            save_uploaded_file(uploaded_video)
             video_bytes = uploaded_video.read()
             st.video(video_bytes)
+            st.write("Tunggu sesaat, hasil deteksi dari video sedang diproses...")
+            try:
+                vid_cap = cv2.VideoCapture('uploads/vid_sample.mp4')
+                st_frame = st.empty()
+                while (vid_cap.isOpened()):
+                    success, image = vid_cap.read()
+                    if success:
+                        _display_detected_frames(0.5,
+                                                model,
+                                                st_frame,
+                                                image,
+                                                False,
+                                                None
+                                                )
+                    else:
+                        vid_cap.release()
+                        break
+            except Exception as e:
+                st.sidebar.error("Error loading video: " + str(e))
     elif input_type == "Webcam":
-        source_webcam = 0
-        model = YOLO('model/best.pt')  # pretrained YOLOv8n model
+        webcam_icon = ":camera:"
+        st.title(f"{webcam_icon} Webcam PPE (Personal Protective Equipment) as input")
+        st.write("Sedang menyiapkan kamera sebagai input, harap tunggu sebentar...")
+
+        source_webcam = 0  # for camera
+
         # is_display_tracker, tracker = display_tracker_options()
         try:
             vid_cap = cv2.VideoCapture(source_webcam)
