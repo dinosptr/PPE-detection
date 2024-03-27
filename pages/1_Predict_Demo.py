@@ -4,6 +4,7 @@ from ultralytics import YOLO
 import cv2
 import os
 import shutil
+import av
 
 model = YOLO('model/best.pt')
 
@@ -128,27 +129,38 @@ def main():
         st.title(f"{webcam_icon} Webcam PPE (Personal Protective Equipment) as input")
         st.write("Sedang menyiapkan kamera sebagai input, harap tunggu sebentar...")
 
-        source_webcam = 0  # for camera
+        def callback(frame):
+            img = frame.to_ndarray(format="bgr24")
 
-        # is_display_tracker, tracker = display_tracker_options()
-        try:
-            vid_cap = cv2.VideoCapture(source_webcam)
-            st_frame = st.empty()
-            while (vid_cap.isOpened()):
-                success, image = vid_cap.read()
-                if success:
-                    _display_detected_frames(0.25,
-                                                model,
-                                                st_frame,
-                                                image,
-                                                False,
-                                                None,
-                                                )
-                else:
-                    vid_cap.release()
-                    break
-        except Exception as e:
-            st.sidebar.error("Error loading video: " + str(e))
+            res = model.predict(img, conf=0.5)
+
+            return av.VideoFrame.from_ndarray(res[0].plot(), format="bgr24")
+        
+        from streamlit_webrtc import webrtc_streamer
+
+
+        webrtc_streamer(key="sample", video_frame_callback=callback)
+        # source_webcam = 0  # for camera
+
+        # # is_display_tracker, tracker = display_tracker_options()
+        # try:
+        #     vid_cap = cv2.VideoCapture(source_webcam)
+        #     st_frame = st.empty()
+        #     while (vid_cap.isOpened()):
+        #         success, image = vid_cap.read()
+        #         if success:
+        #             _display_detected_frames(0.25,
+        #                                         model,
+        #                                         st_frame,
+        #                                         image,
+        #                                         False,
+        #                                         None,
+        #                                         )
+        #         else:
+        #             vid_cap.release()
+        #             break
+        # except Exception as e:
+        #     st.sidebar.error("Error loading video: " + str(e))
 
 if __name__ == "__main__":
     main()
