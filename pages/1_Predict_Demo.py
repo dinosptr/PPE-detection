@@ -139,7 +139,7 @@ def main():
         from streamlit_webrtc import webrtc_streamer
 
 
-        webrtc_streamer(key="sample", video_frame_callback=callback)
+        webrtc_streamer(key="sample")
         # source_webcam = 0  # for camera
 
         # # is_display_tracker, tracker = display_tracker_options()
