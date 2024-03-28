@@ -4,7 +4,7 @@ from ultralytics import YOLO
 import cv2
 import os
 import shutil
-import av
+# import av
 
 model = YOLO('model/best.pt')
 
@@ -80,15 +80,37 @@ def main():
 
     if input_type == "Image":
         st.title("Deteksi PPE (Personal Protective Equipment)")
-        # Bagian untuk mengunggah gambar atau video
-        upload_icon = ":camera:"
-        uploaded_file = st.file_uploader(f"{upload_icon} Unggah Gambar PPE (Personal Protective Equipment)", type=["jpg", "jpeg", "png"])
-        if uploaded_file is not None:
-            # Proses gambar dengan menggunakan st.cache
-            result_image = process_image(uploaded_file, model, confidence_threshold)
 
-            # Tampilkan hasil deteksi
-            st.image(result_image, caption='Result PPE Detection', use_column_width=True)
+        # Buat radio button
+        option = st.radio(
+            "Pilih sumber gambar:",
+            ("Upload Gambar", "Take Picture"),
+            horizontal=True,
+        )
+
+        # Bagian untuk upload gambar
+        if option == "Upload Gambar":
+            upload_icon = ":camera:"
+            uploaded_file = st.file_uploader(f"{upload_icon} Unggah Gambar PPE (Personal Protective Equipment)", type=["jpg", "jpeg", "png"])
+
+            if uploaded_file is not None:
+                # Proses gambar dengan menggunakan st.cache
+                result_image = process_image(uploaded_file, model, confidence_threshold)
+
+                # Tampilkan hasil deteksi
+                st.image(result_image, caption='Result PPE Detection', use_column_width=True)
+
+        # Bagian untuk take picture
+        elif option == "Take Picture":
+            # Gunakan st.camera_input untuk mengambil gambar
+            image = st.camera_input("Take a picture")
+
+            if image is not None:
+                # Proses gambar dengan menggunakan st.cache
+                result_image = process_image(image, model, confidence_threshold)
+
+                # Tampilkan hasil deteksi
+                st.image(result_image, caption='Result PPE Detection', use_column_width=True)
 
     elif input_type == "Video":
         # Nama direktori yang akan dihapus
@@ -129,38 +151,38 @@ def main():
         st.title(f"{webcam_icon} Webcam PPE (Personal Protective Equipment) as input")
         st.write("Sedang menyiapkan kamera sebagai input, harap tunggu sebentar...")
 
-        def callback(frame):
-            img = frame.to_ndarray(format="bgr24")
+        # def callback(frame):
+        #     img = frame.to_ndarray(format="bgr24")
 
-            res = model.predict(img, conf=0.5)
+        #     res = model.predict(img, conf=0.5)
 
-            return av.VideoFrame.from_ndarray(res[0].plot(), format="bgr24")
+        #     return av.VideoFrame.from_ndarray(res[0].plot(), format="bgr24")
         
-        from streamlit_webrtc import webrtc_streamer
+        # from streamlit_webrtc import webrtc_streamer
 
 
-        webrtc_streamer(key="sample")
-        # source_webcam = 0  # for camera
+        # webrtc_streamer(key="sample")
+        source_webcam = 0  # for camera
 
-        # # is_display_tracker, tracker = display_tracker_options()
-        # try:
-        #     vid_cap = cv2.VideoCapture(source_webcam)
-        #     st_frame = st.empty()
-        #     while (vid_cap.isOpened()):
-        #         success, image = vid_cap.read()
-        #         if success:
-        #             _display_detected_frames(0.25,
-        #                                         model,
-        #                                         st_frame,
-        #                                         image,
-        #                                         False,
-        #                                         None,
-        #                                         )
-        #         else:
-        #             vid_cap.release()
-        #             break
-        # except Exception as e:
-        #     st.sidebar.error("Error loading video: " + str(e))
+        # is_display_tracker, tracker = display_tracker_options()
+        try:
+            vid_cap = cv2.VideoCapture(source_webcam)
+            st_frame = st.empty()
+            while (vid_cap.isOpened()):
+                success, image = vid_cap.read()
+                if success:
+                    _display_detected_frames(0.25,
+                                                model,
+                                                st_frame,
+                                                image,
+                                                False,
+                                                None,
+                                                )
+                else:
+                    vid_cap.release()
+                    break
+        except Exception as e:
+            st.sidebar.error("Error loading video: " + str(e))
 
 if __name__ == "__main__":
     main()
