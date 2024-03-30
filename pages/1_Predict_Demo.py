@@ -4,7 +4,6 @@ from ultralytics import YOLO
 import cv2
 import os
 import shutil
-# import av
 
 model = YOLO('model/best.pt')
 
